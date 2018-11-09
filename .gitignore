@@ -1,20 +1,22 @@
 # NPM
-node_modules
-npm-debug.log
-sandboxes.ts
+web/node_modules
+web/npm-debug.log
+web/sandboxes.ts
 
 # Code Editor Settings
 .idea
 .vs
+web/.idea
+web/.vs
 
 # Build Generated Files
-src/app/**/*.js
-src/app/**/*.js.map
+web/src/app/**/*.js
+web/src/app/**/*.js.map
 
 # Ignore any Webpack generated files
-dist
-src/app/devDist
-src/app/dist
+web/dist
+web/src/app/devDist
+web/src/app/dist
 
 
 
