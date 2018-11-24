@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     }
 
     submit({ value, valid }: { value: IUserLogin, valid: boolean }) {
+      console.log('submit login');
         this.authService.login(value)
             .subscribe((status: boolean) => {
                 if (status) {
@@ -47,6 +48,8 @@ export class LoginComponent implements OnInit {
                         this.router.navigate(['/customers']);
                     }
                 } else {
+                  console.log('no login');
+                  console.log(status);
                     const loginError = 'Unable to login';
                     this.errorMessage = loginError;
                     this.growler.growl(loginError, GrowlerMessageType.Danger);

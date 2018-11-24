@@ -17,7 +17,7 @@ export class CustomerEditComponent implements OnInit {
 
   customer: ICustomer =
     {
-      id: 0,
+      _id: '',
       firstName: '',
       lastName: '',
       gender: '',
@@ -25,8 +25,9 @@ export class CustomerEditComponent implements OnInit {
       city: '',
       state: {
         abbreviation: '',
-        name: ''
-      }
+        name: '',
+        _id: ''
+      },
     };
   states: IState[];
   errorMessage: string;
@@ -46,8 +47,8 @@ export class CustomerEditComponent implements OnInit {
     // since param won't be changing while component is alive.
     // Could use this.route.parent.snapshot.params["id"] to simplify it.
     this.route.parent.params.subscribe((params: Params) => {
-      const id = +params['id'];
-      if (id !== 0) {
+      const id = params['id'];
+      if (id !== '0') {
         this.operationText = 'Update';
         this.getCustomer(id);
       }
@@ -58,12 +59,15 @@ export class CustomerEditComponent implements OnInit {
 
   getCustomer(id: number) {
     this.dataService.getCustomer(id).subscribe((customer: ICustomer) => {
+      console.log('getCustomer');
+      console.log(id);
+      console.log(customer);
       this.customer = customer;
     });
   }
 
   submit() {
-    if (this.customer.id === 0) {
+    if (this.customer._id === '') {
       this.dataService.insertCustomer(this.customer)
         .subscribe((insertedCustomer: ICustomer) => {
           if (insertedCustomer) {
@@ -103,7 +107,7 @@ export class CustomerEditComponent implements OnInit {
 
   delete(event: Event) {
     event.preventDefault();
-    this.dataService.deleteCustomer(this.customer.id)
+    this.dataService.deleteCustomer(this.customer._id)
       .subscribe((status: boolean) => {
         if (status) {
           this.router.navigate(['/customers']);

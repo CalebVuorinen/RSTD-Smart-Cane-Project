@@ -1,8 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes } from '@angular/router';
+import {ILocation} from "selenium-webdriver";
 
 export interface ICustomer {
-    id: number;
+    _id?: string;
     firstName: string;
     lastName: string;
     gender: string;
@@ -13,11 +14,21 @@ export interface ICustomer {
     orderTotal?: number;
     latitude?: number;
     longitude?: number;
+    locations?: ILocations[];
+    macAddress?: string;
+}
+
+export interface ILocations {
+    latitude?: number;
+    longitude?: number;
+    date?: string;
+    time?: string;
 }
 
 export interface IState {
     abbreviation: string;
     name: string;
+    _id?: string;
 }
 
 export interface IOrder {

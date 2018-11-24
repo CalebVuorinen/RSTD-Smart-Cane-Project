@@ -62,14 +62,14 @@ export class DataService {
     }
 
     updateCustomer(customer: ICustomer): Observable<boolean> {
-        return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer.id, customer)
+        return this.http.put<IApiResponse>(this.customersBaseUrl + '/' + customer._id, customer)
             .pipe(
                 map(res => res.status),
                 catchError(this.handleError)
             );
     }
 
-    deleteCustomer(id: number): Observable<boolean> {
+    deleteCustomer(id: string): Observable<boolean> {
         return this.http.delete<IApiResponse>(this.customersBaseUrl + '/' + id)
             .pipe(
                 map(res => res.status),
