@@ -1,6 +1,6 @@
 {
     "databaseConfig": {
-        "host": "rstd-smart-cane.herokuapp.com",
-        "database": "customermanager"
+        "host": "heroku_trts7fz5:cr52n7mpe2j8ehe0sc9b6vip9q@ds115854.mlab.com:15854",
+        "database": "heroku_trts7fz5"
     }
 }
