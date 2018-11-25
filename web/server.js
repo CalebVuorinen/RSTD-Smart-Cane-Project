@@ -9,6 +9,7 @@ var express     = require('express'),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8'));
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

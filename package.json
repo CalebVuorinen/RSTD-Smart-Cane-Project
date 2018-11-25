@@ -1,0 +1,7 @@
+{
+    "name": "smart-cane-app",
+    "version": "0.0.0",
+    "scripts": {
+      "postinstall": "npm install --prefix web"
+    }
+  }
