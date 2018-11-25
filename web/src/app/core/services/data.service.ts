@@ -10,8 +10,8 @@ import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../sh
 export class DataService {
 
     customersBaseUrl = '/api/customers';
-    ordersBaseUrl = '/api/orders';
-    orders: IOrder[];
+    historyBaseUrl = '/api/history';
+    history: IOrder[];
     states: IState[];
 
     constructor(private http: HttpClient) { }
@@ -95,9 +95,9 @@ export class DataService {
 
     calculateCustomersOrderTotal(customers: ICustomer[]) {
         for (const customer of customers) {
-            if (customer && customer.orders) {
+            if (customer && customer.history) {
                 let total = 0;
-                for (const order of customer.orders) {
+                for (const order of customer.history) {
                     total += order.itemCost;
                 }
                 customer.orderTotal = total;

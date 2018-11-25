@@ -5,10 +5,10 @@ import { ICustomer, IPagedResults } from '../shared/interfaces';
 import { TrackByService } from '../core/services/trackby.service';
 
 @Component({
-    selector: 'cm-customers-orders',
-    templateUrl: './orders.component.html'
+    selector: 'cm-customers-history',
+    templateUrl: './history.component.html'
 })
-export class OrdersComponent implements OnInit {
+export class HistoryComponent implements OnInit {
 
     customers: ICustomer[];
     totalRecords = 0;

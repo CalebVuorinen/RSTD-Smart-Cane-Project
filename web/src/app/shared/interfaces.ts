@@ -10,7 +10,7 @@ export interface ICustomer {
     address: string;
     city: string;
     state: IState;
-    orders?: IOrder[];
+    history?: IOrder[];
     orderTotal?: number;
     latitude?: number;
     longitude?: number;

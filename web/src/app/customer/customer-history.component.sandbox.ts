@@ -2,7 +2,7 @@ import { sandboxOf } from 'angular-playground';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
 import { DataService } from '../core/services/data.service';
-import { CustomerOrdersComponent } from './customer-orders.component';
+import { CustomerHistoryComponent } from './customer-history.component';
 import { MockDataService, MockActivatedRoute, getActivatedRouteWithParent } from '../shared/mocks';
 import { ActivatedRoute } from '@angular/router';
 
@@ -15,15 +15,15 @@ const sandboxConfig = {
         return route;
       }}
   ],
-  label: 'Customer Orders Component'
+  label: 'Customer history Component'
 };
 
-export default sandboxOf(CustomerOrdersComponent, sandboxConfig)
-  .add('With Orders', {
-    template: `<cm-customer-orders></cm-customer-orders>`
+export default sandboxOf(CustomerHistoryComponent, sandboxConfig)
+  .add('With history', {
+    template: `<cm-customer-history></cm-customer-history>`
   })
-  .add('Without Orders', {
-    template: `<cm-customer-orders></cm-customer-orders>`,
+  .add('Without history', {
+    template: `<cm-customer-history></cm-customer-history>`,
     providers: [ { provide: ActivatedRoute, useFactory: () => {
       const route = getActivatedRouteWithParent([{ id: null }]);
       return route;

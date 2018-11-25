@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'cm-orders',
+  selector: 'cm-history',
   templateUrl: './customer.component.html'
 })
 export class CustomerComponent implements OnInit {
@@ -20,8 +20,8 @@ export class CustomerComponent implements OnInit {
       //   case 'details':
       //     this.displayMode = CustomerDisplayModeEnum.Details;
       //     break;
-      //   case 'orders':
-      //     this.displayMode = CustomerDisplayModeEnum.Orders;
+      //   case 'history':
+      //     this.displayMode = CustomerDisplayModeEnum.history;
       //     break;
       //   case 'edit':
       //     this.displayMode = CustomerDisplayModeEnum.Edit;
@@ -33,6 +33,6 @@ export class CustomerComponent implements OnInit {
 
 // enum CustomerDisplayModeEnum {
 //   Details=0,
-//   Orders=1,
+//   history=1,
 //   Edit=2
 // }

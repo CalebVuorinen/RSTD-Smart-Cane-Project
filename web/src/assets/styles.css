@@ -31,11 +31,11 @@ th {
   cursor: pointer;
 }
 
-.orders-table {
+.history-table {
     width:50%;
 }
 
-.orders-table td {
+.history-table td {
     width: 50%;
 }
 
@@ -84,7 +84,7 @@ a.navbar-brand {
 
 .navbar-inner {
     padding-left: 0px;
-    background-color: #027FF4;
+    background-color: #457B9D;
 }
 
 .navbar-inner.toolbar {
@@ -97,12 +97,16 @@ a.navbar-brand {
 }
 
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
-    background-color: #efefef;
-    color: #808080;
+    background-color: #A8DADC;
+    color: #1D3557;
+}
+
+.nav>li>a:focus, .nav>li>a:hover{
+ background-color: #A8DADC;
 }
 
 .navbar .nav li.toolbaritem a:hover, .navbar .nav li a:hover {
-    color: #E03930;
+    color: #E63946;
 }
 
 .navbar .nav > li  {

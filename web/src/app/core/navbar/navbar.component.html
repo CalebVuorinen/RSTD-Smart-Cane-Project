@@ -9,13 +9,15 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" routerLink="/customers">
-                <img src="assets/images/people.png" alt="logo" />
-                <span class="app-title">Customer Manager</span>
+                <img alt="logo" src="assets/images/SmartCane.png" style="
+                width: 30px;
+                height: 50px;">
+                <span class="app-title">Smart-Cane Portal</span>
             </a>
             <span class="navbar-collapse" [attr.data-collapse]="isCollapsed">
                 <ul class="nav navbar-nav nav-pills navBarPadding">
                     <li routerLinkActive="active"><a routerLink="/customers">Customers</a></li>
-                    <li routerLinkActive="active"><a routerLink="/orders">Orders</a></li>
+                    <li routerLinkActive="active"><a routerLink="/history">History</a></li>
                     <li routerLinkActive="active"><a routerLink="/about">About</a></li>
                     <li routerLinkActive="active" (click)="loginOrOut()"><a>{{ loginLogoutText }}</a></li>
                 </ul>

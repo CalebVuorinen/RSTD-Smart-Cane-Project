@@ -2,19 +2,20 @@
     <div class="container">
         <header>
             <h3>
-                <span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Orders
+                <span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;History
             </h3>
         </header>
         <br />
 
         <div class="container">
             <div *ngIf="customers">
-
+             
                 <div class="row" *ngFor="let customer of customers;trackBy:trackbyService.customer">
+                        {{customer}}
                     <h4>{{ customer.firstName | capitalize }} {{ customer.lastName | capitalize }}</h4>
                     <br />
-                    <table *ngIf="customer.orders && customer.orders.length" class="table table-striped table-hover orders-table">
-                        <tr *ngFor="let order of customer.orders;trackBy:trackbyService.order">
+                    <table *ngIf="customer.history && customer.history.length" class="table table-striped table-hover history-table">
+                        <tr *ngFor="let order of customer.history;trackBy:trackbyService.order">
                             <td>{{order.productName}}</td>
                             <td class="text-right">{{ order.itemCost | currency:'USD':'symbol' }}</td>    
                         </tr>
@@ -23,8 +24,8 @@
                             <td class="text-right">{{ customer.orderTotal | currency:'USD':'symbol' }}
                         </tr>
                     </table>
-                    <div *ngIf="!customer.orders || !customer.orders.length">
-                        No orders found
+                    <div *ngIf="!customer.history || !customer.history.length">
+                        No history found
                     </div> 
                 </div>
 

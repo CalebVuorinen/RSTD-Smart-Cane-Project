@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
       State = require('./state');
 
 //console.log(State);
-const OrderSchema = new Schema({
+const HistorySchema = new Schema({
   productName  : { type : String, required: true, trim: true },
   itemCost     : { type : Number },
 });
@@ -26,7 +26,7 @@ const CustomerSchema = new Schema({
   zip         : { type : Number },
   gender      : { type : String },
   // orderCount  : { type : Number },
-  // orders      : [ OrderSchema ],
+  // history      : [ historychema ],
   latitude    : { type : Number },
   longitude   : { type : Number },
   locations   : [ LocationsSchema ],

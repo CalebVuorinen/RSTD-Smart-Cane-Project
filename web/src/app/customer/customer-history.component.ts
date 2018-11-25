@@ -5,12 +5,12 @@ import { DataService } from '../core/services/data.service';
 import { ICustomer, IOrder, IOrderItem } from '../shared/interfaces';
 
 @Component({
-  selector: 'cm-customer-orders',
-  templateUrl: './customer-orders.component.html'
+  selector: 'cm-customer-history',
+  templateUrl: './customer-history.component.html'
 })
-export class CustomerOrdersComponent implements OnInit {
+export class CustomerHistoryComponent implements OnInit {
 
-  orders: IOrder[] = [];
+  history: IOrder[] = [];
   customer: ICustomer;
 
   constructor(private route: ActivatedRoute, private dataService: DataService) { }
@@ -25,7 +25,7 @@ export class CustomerOrdersComponent implements OnInit {
       });
   }
 
-  ordersTrackBy(index: number, orderItem: any) {
+  historyTrackBy(index: number, orderItem: any) {
     return index;
   }
 

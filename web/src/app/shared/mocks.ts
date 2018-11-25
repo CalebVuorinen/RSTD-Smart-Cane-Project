@@ -85,7 +85,7 @@ export const customers = [
     //         'name': 'Arizona',
     //         'id': 1
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Basketball', 'itemCost': 7.99 },
     //         { 'productName': 'Shoes', 'itemCost': 199.99 }
     //     ],
@@ -104,7 +104,7 @@ export const customers = [
     //         'name': 'California',
     //         'id': 1
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Frisbee', 'itemCost': 2.99 },
     //         { 'productName': 'Hat', 'itemCost': 5.99 }
     //     ],
@@ -123,7 +123,7 @@ export const customers = [
     //         'name': 'Washington',
     //         'id': 1
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Boomerang', 'itemCost': 29.99 },
     //         { 'productName': 'Helmet', 'itemCost': 19.99 },
     //         { 'productName': 'Kangaroo Saddle', 'itemCost': 179.99 }
@@ -142,7 +142,7 @@ export const customers = [
     //         'abbreviation': 'AZ',
     //         'name': ' Arizona '
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Budgie Smugglers', 'itemCost': 19.99 },
     //         { 'productName': 'Swimming Cap', 'itemCost': 5.49 }
     //     ],
@@ -160,7 +160,7 @@ export const customers = [
     //         'abbreviation': 'TX',
     //         'name': 'Texas'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Bow', 'itemCost': 399.99 },
     //         { 'productName': 'Arrows', 'itemCost': 69.99 }
     //     ],
@@ -178,7 +178,7 @@ export const customers = [
     //         'abbreviation': 'FL',
     //         'name': 'Florida'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Baseball', 'itemCost': 9.99 },
     //         { 'productName': 'Bat', 'itemCost': 19.99 }
     //     ],
@@ -196,7 +196,7 @@ export const customers = [
     //         'abbreviation': 'NC',
     //         'name': 'North Carolina'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Surfboard', 'itemCost': 299.99 },
     //         { 'productName': 'Wax', 'itemCost': 5.99 },
     //         { 'productName': 'Shark Repellent', 'itemCost': 15.99 }
@@ -215,7 +215,7 @@ export const customers = [
     //         'abbreviation': 'CA',
     //         'name': 'California'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Saddle', 'itemCost': 599.99 },
     //         { 'productName': 'Riding cap', 'itemCost': 79.99 }
     //     ],
@@ -233,7 +233,7 @@ export const customers = [
     //         'abbreviation': 'FL',
     //         'name': 'Florida'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Baseball', 'itemCost': 9.99 },
     //         { 'productName': 'Bat', 'itemCost': 19.99 }
     //     ],
@@ -251,7 +251,7 @@ export const customers = [
     //         'abbreviation': 'GA',
     //         'name': 'Georgia'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Surfboard', 'itemCost': 299.99 },
     //         { 'productName': 'Wax', 'itemCost': 5.99 },
     //         { 'productName': 'Shark Repellent', 'itemCost': 7.99 }
@@ -298,7 +298,7 @@ export const customers = [
     //         'abbreviation': 'NY',
     //         'name': 'New York City'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Car', 'itemCost': 42999.99 },
     //         { 'productName': 'Wax', 'itemCost': 5.99 },
     //         { 'productName': 'Shark Repellent', 'itemCost': 7.99 }
@@ -415,7 +415,7 @@ export const customers = [
     //         'abbreviation': 'COZ',
     //         'name': 'Canton of Zurick'
     //     },
-    //     'orders': [
+    //     'history': [
     //         { 'productName': 'Baseball', 'itemCost': 9.99 },
     //         { 'productName': 'Bat', 'itemCost': 19.99 }
     //     ],
