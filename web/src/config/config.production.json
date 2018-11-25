@@ -1,6 +1,6 @@
 {
     "databaseConfig": {
-        "host": "",
-        "database": ""
+        "host": "rstd-smart-cane.herokuapp.com",
+        "database": "customermanager"
     }
 }
