@@ -55,7 +55,7 @@ database.open(() => {
     // if (process.env.NODE_ENV === 'development') {
     //  seeder.init();
     // }
-    // seeder.init();
+    seeder.init();
 });
 
 router.load(app, './src/controllers');
