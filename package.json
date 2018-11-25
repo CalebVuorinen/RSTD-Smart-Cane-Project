@@ -2,7 +2,8 @@
     "name": "smart-cane-app",
     "version": "0.0.0",
     "scripts": {
-      "postinstall": "npm install --prefix web"
+      "postinstall": "npm install --prefix web",
+      "start": "npm start --prefix web"
     },
     "engines": {
       "node": "8.12.0",
