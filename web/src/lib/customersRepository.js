@@ -85,10 +85,9 @@ class CustomersRepository {
     // insert a  customer
     insertCustomer(body, state, callback) {
         console.log('*** CustomersRepository.insertCustomer');
-        console.log(state);
         console.log(body);
         let customer = new Customer();
-        let newState = { 'id': body.state.id, 'abbreviation':  body.state.abbreviation, 'name':  body.state.name };
+        let newState = { 'id': body.state._id, 'abbreviation':  body.state.abbreviation, 'name':  body.state.name };
         console.log(body);
 
         customer.firstName = body.firstName;
@@ -97,7 +96,7 @@ class CustomersRepository {
         customer.address = body.address;
         customer.city = body.city;
         customer.state = newState;
-        customer.stateId = newState.id;
+        customer.stateId = newState['id'];
         // customer.zip = 123;
         customer.gender = body.gender;
         customer.macAddress = body.macAddress;
@@ -116,8 +115,10 @@ class CustomersRepository {
 
     updateCustomer(id, body, state, callback) {
         console.log('*** CustomersRepository.editCustomer');
+        console.log(state)
+        console.log(body)
 
-        let stateObj = { 'id': state[0].id, 'abbreviation': state[0].abbreviation, 'name': state[0].name }
+        let stateObj = { 'id': state[0]._id, 'abbreviation': state[0].abbreviation, 'name': state[0].name };
 
         Customer.findById(id, (err, customer)  => {
             if (err) {

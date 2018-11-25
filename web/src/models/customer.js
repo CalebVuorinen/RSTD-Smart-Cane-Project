@@ -21,7 +21,7 @@ const CustomerSchema = new Schema({
   email       : { type : String, required: true, trim: true },
   address     : { type : String, required: true, trim: true },
   city        : { type : String, required: true, trim: true },
-  stateId     : { type : Number, required: true },
+  stateId     : { type : String, required: true },
   state       : State.schema ,
   zip         : { type : Number },
   gender      : { type : String },

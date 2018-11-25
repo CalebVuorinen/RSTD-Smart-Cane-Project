@@ -18,7 +18,7 @@ class StatesRepository {
     // get a state
     getState(stateId, callback) {
         console.log('*** StatesRepository.getState');
-        State.find({ 'id': stateId }, {}, (err, state) => {
+        State.find({ '_id': stateId }, {}, (err, state) => {
             if (err) {
                 console.log(`*** StatesRepository.getState err: ${err}`);
                 return callback(err);
