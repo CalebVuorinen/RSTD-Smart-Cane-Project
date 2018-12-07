@@ -9,20 +9,29 @@
  modified 31 May 2012
  by Tom Igoe
  */
+
 #include <SPI.h>
 #include <WiFiNINA.h>
+#include <ArduinoHttpClient.h>
 #include <Arduino.h>
 #include <TinyGPS++.h>
-
 #include "arduino_secrets.h" 
 ///////please enter your sensitive data in the Secret tab/arduino_secrets.h
+
 char ssid[] = SECRET_SSID;        // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
+
 int status = WL_IDLE_STATUS;     // the Wifi radio's status
 TinyGPSPlus gps;
-//IPAddress server(74,125,115,105); //change this
+
+const char WEBSITE[] = "rstd-smart-cane.herokuapp.com";
+const char path[] = "/api/customers/location?";
+int port = 8080;
+
 WiFiClient client;
-const char WEBSITE[] = "https://rstd-smart-cane.herokuapp.com/api/customers";
+//HttpClient client = HttpClient(wifi, WEBSITE, port);
+String response;
+int statusCode = 0;
 
 void setup() {
   //Initialize serial and wait for port to open:
@@ -63,15 +72,12 @@ void setup() {
 }
 
 void loop() {
-  /*// check the network connection once every 10 seconds:
-  delay(10000);
-  printCurrentNet();*/
-  // print your MAC address:
+// print your MAC address:
     byte mac[6];
     WiFi.macAddress(mac);
     Serial.print("MAC address: ");
     printMacAddress(mac);
-  // GPS
+// Print GPS data
   /*while (Serial1.available() > 0)
     if (gps.encode(Serial1.read())){
       // location
@@ -123,13 +129,14 @@ void loop() {
     Serial.println();
     } */
     String m = mac2String(mac);
-                       //server
-    if (client.connect(WEBSITE, 80)) {
+// form postMessage
+    /*if (client.connect(WEBSITE, 80)) {
       Serial.println("connected");
-    
-      String postMessage = "POST /location?mac=" + m;
+      String postMessage = "";
+      while (Serial1.available() > 0)
       if (gps.encode(Serial1.read())){
-      postMessage + "&latitudeData=" + gps.location.lat()
+      postMessage += "mac=123";
+      postMessage += "&latitudeData=" + String(gps.location.lat())
       + "&longitudeData=" + gps.location.lng()
       + "&dateData=" + gps.date.day() + "/" + gps.date.month() + "/" + gps.date.year()
       + "&timeData=";
@@ -145,11 +152,32 @@ void loop() {
           if (gps.time.centisecond() < 10) postMessage = postMessage + "0";
           postMessage = postMessage + gps.time.centisecond();
       }
-      // Make a HTTP request:
-      client.println(postMessage);
-      client.println();
-      Serial.println("Data sent");
-    }
+
+    }*/
+// Make a HTTP request:
+  Serial.println("making POST request");
+  String postData = "mac=123&latitudeData=65.00&longitudeData=25.47&dateData=7/12/2018&timeData=21:21:27.00";
+
+  if (client.connect(WEBSITE, 80)) {
+    Serial.println("Connected to http client");
+    client.println("POST /api/customers/location? HTTP/1.1");
+    client.println("Host:  rstd-smart-cane.herokuapp.com");
+    client.println("User-Agent: Arduino/1.0");
+    client.println("Connection: close");
+    client.println("Content-Type: application/json;");
+    client.print("Content-Length: ");
+    client.println(postData.length());
+    client.println();
+    client.println(postData);
+    Serial.println("\nData sent");
+  }
+  /*statusCode = client.responseStatusCode();
+  response = client.responseBody();
+  Serial.print("Status code: ");
+  Serial.println(statusCode);
+  Serial.print("Response: ");
+  Serial.println(response);*/
+  
 }
 
 void printWifiData() {
@@ -202,14 +230,9 @@ void printMacAddress(byte mac[]) {
   Serial.println();
 }
 
-String mac2String(byte ar[]){
-  String s;
-  for (byte i = 0; i < 6; ++i)
-  {
-    char buf[3];
-    sprintf(buf, "%2X", ar[i]);
-    s += buf;
-    if (i < 5) s += ':';
-  }
-  return s;
+String mac2String(byte mac[]){
+  char buf[20];
+  snprintf(buf, sizeof(buf), "%02x:%02x:%02x:%02x:%02x:%02x",
+           mac[5], mac[4], mac[3], mac[2], mac[1], mac[0]);
+  return String(buf);
 }
