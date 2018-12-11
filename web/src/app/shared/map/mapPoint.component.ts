@@ -9,6 +9,7 @@ export class MapPointComponent implements OnInit {
   @Input() longitude: number;
   @Input() latitude: number;
   @Input() markerText: string;
+  @Input() dateTime?: Date;
 
   constructor() { }
 

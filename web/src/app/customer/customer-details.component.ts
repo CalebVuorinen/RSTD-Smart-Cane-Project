@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { ICustomer } from '../shared/interfaces';
 import { DataService } from '../core/services/data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'cm-customer-details',
@@ -28,6 +29,11 @@ export class CustomerDetailsComponent implements OnInit {
 
             console.log('---------------');
             console.log(customer.locations);
+            for (const location of customer.locations) {
+              if (location.dateTime == null && location.date != null && location.time){
+                location.dateTime = new Date(moment(location.date + location.time, 'DD/MM/YYYYhh:mm:ss.SS').toDate());
+              }
+            }
           });
       }
     });

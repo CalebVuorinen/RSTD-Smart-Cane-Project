@@ -33,6 +33,7 @@ var db;
 // Connect to the database before starting the application server.
 
 mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test", function (err, client) {
+  // mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test,localhost:27018,localhost:27019?replicaSet=mongo-repl", function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
@@ -47,6 +48,15 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
     var port = server.address().port;
     console.log("App now running on port", port);
   });
+
+  // const collection = db.collection("customers");
+  // const changeStream = collection.watch();
+  // // start listen to changes
+  // changeStream.on("change", function(change) {
+  //   console.log('change----------------------------------------------------------------------------');
+  //   console.log(change);
+  // });
+
 });
 
 database.open(() => {

@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { HttpModule } from '@angular/http';
     CoreModule,           // Singleton objects (services, components that are loaded only once, etc.)
     SharedModule,         // Shared (multi-instance) objects
     HttpModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

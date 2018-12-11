@@ -23,6 +23,7 @@ export interface ILocations {
     longitude?: number;
     date?: string;
     time?: string;
+    dateTime?: Date;
 }
 
 export interface IState {

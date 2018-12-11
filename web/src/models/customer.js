@@ -12,7 +12,8 @@ const LocationsSchema = new Schema({
   latitude    : { type : Number },
   longitude   : { type : Number },
   date        : { type : String },
-  time        : { type : String }
+  time        : { type : String },
+  dateTime    : { type : Date },
 });
 
 const CustomerSchema = new Schema({

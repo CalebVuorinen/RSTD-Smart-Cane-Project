@@ -1,1 +1,6 @@
+<div *ngIf="showFilter">
+  <input [owlDateTime]="dt" [owlDateTimeTrigger]="dt" placeholder="Filter by date" [(ngModel)]="filterDate"
+       (ngModelChange)="onDateFilterChange($event)">
+<owl-date-time #dt [pickerType]="'calendar'"></owl-date-time>
+</div>
 <div #mapContainer [style.height]="mapHeight" [style.width]="mapWidth">Map Loading....</div>

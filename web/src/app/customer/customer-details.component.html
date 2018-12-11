@@ -21,10 +21,12 @@
            [longitude]="customer.longitude" 
            [zoom]="10" 
            [enabled]="mapEnabled"
+           [showFilter]="true"
+           [withRoutes]="true"
            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state.name">
         <cm-map-point
             *ngFor="let location of customer.locations"
-            [latitude]="location.latitude"
+            [latitude]="location.latitude" [dateTime]="location.dateTime"
             [longitude]="location.longitude"
             [markerText]="'<h3>' + location.date + ' ' + location.time + '</a></h3>'"></cm-map-point>
       </cm-map>

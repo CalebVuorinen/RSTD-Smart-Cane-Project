@@ -1,6 +1,7 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       Customer = require('../models/customer');
+      moment = require('moment');
 
 class CustomersRepository {
 
@@ -179,12 +180,14 @@ class CustomersRepository {
 
               customers[0].latitude = query['latitudeData'];
               customers[0].longitude = query['longitudeData'];
+              let dateTime = moment(query['dateData'] + query['timeData'], 'DD/MM/YYYYhh:mm:ss.SS').toDate();
               customers[0].locations.addToSet(
                   {
                     latitude: query['latitudeData'],
                     longitude: query['longitudeData'],
                     date: query['dateData'],
-                    time: query['timeData']
+                    time: query['timeData'],
+                    dateTime: new Date(dateTime)
                   }
               );
 

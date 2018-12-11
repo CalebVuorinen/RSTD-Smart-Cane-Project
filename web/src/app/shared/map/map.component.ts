@@ -7,6 +7,8 @@ import {
 
 import { debounceTime } from 'rxjs/operators';
 import { MapPointComponent } from './mapPoint.component';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'cm-map',
@@ -22,8 +24,10 @@ export class MapComponent implements OnInit, AfterContentInit {
   private loadingScript: boolean;
   private map: google.maps.Map;
   private markers: google.maps.Marker[] = [];
+  private polylines: google.maps.Polyline[] = [];
   mapHeight: string;
   mapWidth: string;
+  selectedMoment: Date;
 
   @Input() height: number;
   @Input() width: number;
@@ -31,6 +35,8 @@ export class MapComponent implements OnInit, AfterContentInit {
   @Input() longitude = -94.1629;
   @Input() markerText = 'Your Location';
   @Input() zoom = 8;
+  @Input() showFilter?: false;
+  @Input() withRoutes?: false;
 
   // Necessary since a map rendered while container is hidden
   // will not load the map tiles properly and show a grey screen
@@ -45,6 +51,7 @@ export class MapComponent implements OnInit, AfterContentInit {
 
   @ViewChild('mapContainer') mapDiv: ElementRef;
   @ContentChildren(MapPointComponent) mapPoints: QueryList<MapPointComponent>;
+  showedMapPoints: any;
 
   constructor() { }
 
@@ -67,7 +74,14 @@ export class MapComponent implements OnInit, AfterContentInit {
         debounceTime(500)
       )
       .subscribe(() => {
-        if (this.enabled) { this.renderMapPoints(); }
+        if (this.enabled) {
+          this.showedMapPoints = this.mapPoints;
+          if (this.withRoutes){
+             this.renderPathsAndMarkers();
+          } else {
+            this.renderMapPoints();
+          }
+        }
       });
   }
 
@@ -75,6 +89,7 @@ export class MapComponent implements OnInit, AfterContentInit {
     // Need slight delay to avoid grey box when google script has previously been loaded.
     // Otherwise map <div> container may not be visible yet which causes the grey box.
     setTimeout(() => {
+      this.showedMapPoints = this.mapPoints;
       this.ensureScript();
     }, 200);
   }
@@ -124,8 +139,12 @@ export class MapComponent implements OnInit, AfterContentInit {
     };
 
     this.map = new google.maps.Map(this.mapDiv.nativeElement, options);
-    if (this.mapPoints && this.mapPoints.length) {
-      this.renderMapPoints();
+    if (this.showedMapPoints && this.showedMapPoints.length) {;
+      if (this.withRoutes){
+         this.renderPathsAndMarkers();
+      } else {
+        this.renderMapPoints();
+      }
     } else {
       this.createMarker(latlng, this.map, this.markerText);
     }
@@ -138,8 +157,9 @@ export class MapComponent implements OnInit, AfterContentInit {
   private renderMapPoints() {
     if (this.map) {
       this.clearMapPoints();
+      this.clearMapPolylines();
 
-      this.mapPoints.forEach((point: MapPointComponent) => {
+      this.showedMapPoints.forEach((point: MapPointComponent) => {
         const mapPointLatlng = this.createLatLong(point.latitude, point.longitude);
         this.createMarker(mapPointLatlng, this.map, point.markerText);
       });
@@ -151,6 +171,13 @@ export class MapComponent implements OnInit, AfterContentInit {
       marker.setMap(null);
     });
     this.markers = [];
+  }
+
+  private clearMapPolylines() {
+    this.polylines.forEach((polyline: google.maps.Polyline) => {
+      polyline.setMap(null);
+    });
+    this.polylines = [];
   }
 
   private createMarker(position: google.maps.LatLng, map: google.maps.Map, title: string) {
@@ -171,4 +198,75 @@ export class MapComponent implements OnInit, AfterContentInit {
       infowindow.open(map, marker);
     });
   }
+
+  private renderPathsAndMarkers(){
+    if (this.map) {
+      this.clearMapPoints();
+      this.clearMapPolylines();
+      let _this = this;
+      let dateTimes = [];
+      this.showedMapPoints.forEach(function (point: MapPointComponent, index) {
+        dateTimes.push(moment(moment(point.dateTime)));
+        // if (index == 0 || index == _this.showedMapPoints.length - 1){
+        //   const mapPointLatlng = _this.createLatLong(point.latitude, point.longitude);
+        //   _this.createMarker(mapPointLatlng, _this.map, point.markerText);
+        // } else {
+        //   let duration = moment.duration(moment(_this.showedMapPoints._results[index-1].dateTime).diff(moment(point.dateTime)));
+        //   console.log(duration.asHours());
+        //   if (duration.asHours() > 24) {
+        //     const mapPointLatlng = _this.createLatLong(point.latitude, point.longitude);
+        //     _this.createMarker(mapPointLatlng, _this.map, point.markerText);
+        //   }
+        // }
+      });
+      let maxDate = moment.max(dateTimes);
+      this.showedMapPoints.forEach(function (point: MapPointComponent) {
+        if (moment(point.dateTime).isSame(maxDate)) {
+          const mapPointLatlng = _this.createLatLong(point.latitude, point.longitude);
+          _this.createMarker(mapPointLatlng, _this.map, point.markerText);
+        }
+      });
+      this.renderPaths();
+    }
+  }
+
+  private renderPaths(){
+    if (this.showedMapPoints && this.showedMapPoints.length) {
+      let pathPoints = [];
+      this.showedMapPoints.forEach((point: MapPointComponent) => {
+        let latLng = this.createLatLong(point.latitude, point.longitude);
+        if (latLng != null) {
+          pathPoints.push(latLng);
+        }
+      });
+
+      const polyline = new google.maps.Polyline({
+        map: this.map,
+        path: pathPoints,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      this.polylines.push(polyline);
+
+      return polyline
+    }
+  }
+
+  onDateFilterChange(event: Date){
+    if (event != null){
+      this.showedMapPoints = this.mapPoints.filter(
+        point => (point.dateTime != null && moment(moment(point.dateTime).format("YYYY-MM-DD")).isSame(moment(event).format("YYYY-MM-DD")))
+      );
+    } else {
+      this.showedMapPoints = this.mapPoints;
+    }
+    if (this.withRoutes){
+       this.renderPathsAndMarkers();
+    } else {
+      this.renderMapPoints();
+    }
+  }
+
 }
