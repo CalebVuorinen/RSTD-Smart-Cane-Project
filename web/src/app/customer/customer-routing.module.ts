@@ -7,6 +7,7 @@ import { CustomerDetailsComponent } from './customer-details.component';
 import { CustomerEditComponent } from './customer-edit.component';
 import { CanActivateGuard } from './can-activate.guard';
 import { CanDeactivateGuard } from './can-deactivate.guard';
+import {CustomerVideoComponent} from "./customer-video.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: 'history', component: CustomerHistoryComponent },
       { path: 'details', component: CustomerDetailsComponent },
+      { path: 'video', component: CustomerVideoComponent },
       {
         path: 'edit',
         component: CustomerEditComponent,
@@ -31,6 +33,8 @@ const routes: Routes = [
   providers: [CanActivateGuard, CanDeactivateGuard]
 })
 export class CustomerRoutingModule {
-  static components = [CustomerComponent, CustomerHistoryComponent, CustomerDetailsComponent, CustomerEditComponent];
+  static components = [CustomerComponent, CustomerHistoryComponent, CustomerDetailsComponent,
+    CustomerVideoComponent, CustomerEditComponent
+  ];
 }
 
